@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -37,6 +38,7 @@ const NAV_ITEMS: Array<NavItem> = [
 
 export default function Header() {
   const { isOpen, onToggle } = useDisclosure();
+  const activePath = useLocation().pathname;
 
   return (
     <Box>
@@ -77,7 +79,7 @@ export default function Header() {
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav items={NAV_ITEMS} />
+            <DesktopNav items={NAV_ITEMS} activePath={activePath} />
           </Flex>
         </Flex>
 
@@ -92,7 +94,7 @@ export default function Header() {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav items={NAV_ITEMS} />
+        <MobileNav items={NAV_ITEMS} activePath={activePath} />
       </Collapse>
     </Box>
   );

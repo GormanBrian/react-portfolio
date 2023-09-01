@@ -5,4 +5,5 @@ export interface NavItem {
 
 export interface NavProps {
   items: Array<NavItem>;
+  activePath: string;
 }

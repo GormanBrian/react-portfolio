@@ -15,7 +15,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
-import type { NavItem } from "./types";
+import type { NavItem, NavProps } from "./types";
 
 const NAV_ITEMS: Array<NavItem> = [
   {
@@ -39,6 +39,16 @@ const NAV_ITEMS: Array<NavItem> = [
 export default function Header() {
   const { isOpen, onToggle } = useDisclosure();
   const activePath = useLocation().pathname;
+
+  const linkColor = useColorModeValue("gray.600", "gray.200");
+  const activeLinkColor = useColorModeValue("gray.800", "white");
+
+  const navProps: NavProps = {
+    items: NAV_ITEMS,
+    activePath,
+    linkColor,
+    activeLinkColor,
+  };
 
   return (
     <Box>
@@ -73,13 +83,13 @@ export default function Header() {
             fontFamily={"heading"}
             fontWeight={700}
             fontSize={"lg"}
-            color={useColorModeValue("gray.800", "white")}
+            color={activeLinkColor}
           >
             Brian Gorman
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav items={NAV_ITEMS} activePath={activePath} />
+            <DesktopNav {...navProps} />
           </Flex>
         </Flex>
 
@@ -94,7 +104,7 @@ export default function Header() {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav items={NAV_ITEMS} activePath={activePath} />
+        <MobileNav {...navProps} />
       </Collapse>
     </Box>
   );

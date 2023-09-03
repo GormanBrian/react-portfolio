@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Box, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import type { NavProps } from "./types";
 
@@ -12,11 +13,9 @@ export default function MobileNav({ items, activePath }: NavProps) {
       {items.map(({ path, label }) => {
         const isActive = path === activePath;
         return (
-          <Stack key={label} spacing={4}>
+          <Link key={path} to={path}>
             <Box
               py={2}
-              as="a"
-              href={path}
               justifyContent="space-between"
               alignItems="center"
               _hover={{
@@ -27,7 +26,7 @@ export default function MobileNav({ items, activePath }: NavProps) {
                 {label}
               </Text>
             </Box>
-          </Stack>
+          </Link>
         );
       })}
     </Stack>

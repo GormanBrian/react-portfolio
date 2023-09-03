@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     if (activePath === "/") {
-      navigate("/AboutMe");
+      navigate("/about-me");
     }
   }, [activePath, navigate]);
 

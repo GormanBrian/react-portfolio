@@ -1,32 +1,41 @@
-import { Link } from "react-router-dom";
-import { Box, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ChakraLink, Box, Stack, Text } from "@chakra-ui/react";
+
 import type { NavProps } from "./types";
 
-export default function MobileNav({ items, activePath }: NavProps) {
-  const color = useColorModeValue("gray.600", "gray.200");
+interface MobileNavProps extends NavProps {
+  backgroundColor: string;
+}
+
+export default function MobileNav({
+  items,
+  activePath,
+  linkColor,
+  activeLinkColor,
+  backgroundColor,
+}: MobileNavProps) {
   return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
+    <Stack bg={backgroundColor} p={4} display={{ md: "none" }}>
       {items.map(({ path, label }) => {
         const isActive = path === activePath;
         return (
-          <Link key={path} to={path}>
-            <Box
+          <Box key={path}>
+            <ChakraLink
+              as={ReactRouterLink}
+              to={path}
               py={2}
               justifyContent="space-between"
               alignItems="center"
               _hover={{
                 textDecoration: "none",
+                color: activeLinkColor,
               }}
             >
-              <Text fontWeight={isActive ? 800 : 600} color={color}>
+              <Text fontWeight={isActive ? 800 : 600} color={linkColor}>
                 {label}
               </Text>
-            </Box>
-          </Link>
+            </ChakraLink>
+          </Box>
         );
       })}
     </Stack>

@@ -6,11 +6,17 @@ import {
   IconButton,
   Stack,
   Collapse,
-  useColorModeValue,
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+
+import {
+  useTextColor,
+  useHeadingColor,
+  useBackgroundColor,
+  useBorderColor,
+} from "../../helpers/colors";
 
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
@@ -40,8 +46,9 @@ export default function Header() {
   const { isOpen, onToggle } = useDisclosure();
   const activePath = useLocation().pathname;
 
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const activeLinkColor = useColorModeValue("gray.800", "white");
+  const backgroundColor = useBackgroundColor();
+  const linkColor = useTextColor();
+  const activeLinkColor = useHeadingColor();
 
   const navProps: NavProps = {
     items: NAV_ITEMS,
@@ -53,14 +60,13 @@ export default function Header() {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
+        bg={backgroundColor}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useBorderColor()}
         align={"center"}
       >
         <Flex
@@ -104,7 +110,7 @@ export default function Header() {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav {...navProps} />
+        <MobileNav {...navProps} backgroundColor={backgroundColor} />
       </Collapse>
     </Box>
   );

@@ -27,6 +27,7 @@ export default function DesktopNav({
                 color: activeLinkColor,
               }}
               borderBottom={isActive ? "2px" : "0"}
+              borderColor={activeLinkColor}
             >
               {label}
             </ChakraLink>

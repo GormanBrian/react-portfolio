@@ -1,7 +1,7 @@
 /* eslint-disable no-control-regex */
 import { Form, withFormik, FormikProps } from "formik";
 import * as Yup from "yup";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Stack, Text } from "@chakra-ui/react";
 
 import Input from "./Input";
 
@@ -19,14 +19,28 @@ const InnerForm = (props: FormikProps<FormValues>) => {
         action="https://formsubmit.co/briangorman99@gmail.com"
         method="POST"
       >
-        <Input name="name" />
-        {touched.name && errors.name && <div>{errors.name}</div>}
-        <Input name="email" />
-        {touched.email && errors.email && <div>{errors.email}</div>}
-        <Input name="message" />
-        {touched.message && errors.message && <div>{errors.message}</div>}
+        <Stack>
+          <Stack>
+            <Input name="name" />
+            {touched.name && errors.name && (
+              <Text color="red.500">{errors.name}</Text>
+            )}
+          </Stack>
+          <Stack>
+            <Input name="email" />
+            {touched.email && errors.email && (
+              <Text color="red.500">{errors.email}</Text>
+            )}
+          </Stack>
+          <Stack>
+            <Input name="message" />
+            {touched.message && errors.message && (
+              <Text color="red.500">{errors.message}</Text>
+            )}
+          </Stack>
+        </Stack>
 
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} mt={"6"}>
           Submit
         </Button>
       </Form>

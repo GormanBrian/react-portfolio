@@ -34,9 +34,17 @@ const InnerForm = (props: FormikProps<FormValues>) => {
   );
 };
 
-interface OuterFormProps {}
+interface ContactFormProps {}
 
-const ContactForm = withFormik<OuterFormProps, FormValues>({
+const ContactForm = withFormik<ContactFormProps, FormValues>({
+  mapPropsToValues: () => {
+    return {
+      name: "",
+      email: "",
+      message: "",
+    };
+  },
+
   validationSchema: () =>
     Yup.object({
       name: Yup.string()
@@ -54,8 +62,9 @@ const ContactForm = withFormik<OuterFormProps, FormValues>({
       message: Yup.string().required("Message is required"),
     }),
 
-  handleSubmit: (values) => {
+  handleSubmit: (values, { resetForm }) => {
     console.log(values);
+    resetForm();
   },
 })(InnerForm);
 

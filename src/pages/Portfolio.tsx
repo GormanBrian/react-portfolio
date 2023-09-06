@@ -5,7 +5,7 @@ const portfolioCardData: Array<PortfolioCardProps> = [
   {
     title: "AFK",
     technology: "HTML / CSS / JS",
-    image: "https://picsum.photos/200/300",
+    image: "/afk_screenshot.png",
     repositoryLink: "https://github.com/Jlausier/AFK-Coop",
     deployedLink: "https://jlausier.github.io/AFK-Coop/",
   },

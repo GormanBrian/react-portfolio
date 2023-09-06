@@ -1,9 +1,10 @@
+import { Box } from "@chakra-ui/react";
 import ContactForm from "../components/ContactForm";
 
 export default function Contact() {
   return (
-    <div>
+    <Box>
       <ContactForm />
-    </div>
+    </Box>
   );
 }
